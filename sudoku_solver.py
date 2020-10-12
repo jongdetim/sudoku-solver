@@ -5,9 +5,9 @@ import numpy as np
 class Sudoku:
 	def __init__(self, starting_state):
 		try:
-			self.state = np.array(starting_state)
+			self.state = np.array(starting_state, dtype='int8')
 		except:
-			print('invalid array')
+			self.input_invalid()
 			exit()
 
 	def	print_state(self):
@@ -28,7 +28,7 @@ class Sudoku:
 
 		for ynum, y in enumerate(self.state):
 			for xnum, num in enumerate(y):
-				if not isinstance(num, np.int32) or num > 9 or num < 0 or (num != 0 and not self.check_legal(ynum, xnum, num)):
+				if num > 9 or num < 0 or (num != 0 and not self.check_legal(ynum, xnum, num)):
 					return self.input_invalid()
 
 		return True
